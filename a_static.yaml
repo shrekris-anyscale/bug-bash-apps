@@ -10,7 +10,8 @@ ray_serve_config:
   - name: static_app
     route_prefix: /
     import_path: hello:app
-    runtime_env: https://github.com/shrekris-anyscale/bug-bash-apps/archive/refs/heads/main.zip
+    runtime_env:
+      working_dir: https://github.com/shrekris-anyscale/bug-bash-apps/archive/refs/heads/main.zip
     deployments:
     - name: Hello
       num_replicas: 20
