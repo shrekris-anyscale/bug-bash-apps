@@ -1,0 +1,18 @@
+name: static_service
+cluster_env: default_cluster_env_2.9.0_py310:1
+cloud: anyscale_v2_default_cloud  # AWS
+# cloud: anyscale_gcp_public_default_cloud_us_west_1  # GCP
+
+ray_serve_config:
+
+  applications:
+
+  - name: static_app
+    route_prefix: /
+    import_path: hello:app
+    runtime_env: https://github.com/shrekris-anyscale/bug-bash-apps/archive/refs/heads/main.zip
+    deployments:
+    - name: Hello
+      num_replicas: 20
+      ray_actor_options:
+        num_cpus: 0
