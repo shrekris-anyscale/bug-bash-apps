@@ -1,20 +1,26 @@
-applications:
+name: health_service
+cluster_env: default_cluster_env_2.9.0_py310:1
+cloud: anyscale_v2_default_cloud  # AWS
+# cloud: anyscale_gcp_public_default_cloud_us_west_1  # GCP
 
-- name: health_app
+ray_serve_config:
 
-  route_prefix: /
-  import_path: health:app
-  runtime_env:
-      working_dir: https://github.com/shrekris-anyscale/bug-bash-apps/archive/refs/heads/main.zip
+  applications:
+  
+  - name: health_app
+    route_prefix: /
+    import_path: health:app
+    runtime_env:
+        working_dir: https://github.com/shrekris-anyscale/bug-bash-apps/archive/refs/heads/main.zip
 
-  deployments:
+    deployments:
 
-  - name: Health
-    num_replicas: 10
-    ray_actor_options:
-      num_cpus: 0.0
+    - name: Health
+      num_replicas: 10
+      ray_actor_options:
+        num_cpus: 0.0
 
-  - name: Writer
-    num_replicas: 1
-    ray_actor_options:
-      num_cpus: 0.0
+    - name: Writer
+      num_replicas: 1
+      ray_actor_options:
+        num_cpus: 0.0
