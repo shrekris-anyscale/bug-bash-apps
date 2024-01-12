@@ -1,0 +1,20 @@
+applications:
+
+- name: health_app
+
+  route_prefix: /
+  import_path: health:app
+  runtime_env:
+      working_dir: https://github.com/shrekris-anyscale/bug-bash-apps/archive/refs/heads/main.zip
+
+  deployments:
+
+  - name: Health
+    num_replicas: 8
+    ray_actor_options:
+      num_cpus: 0.0
+
+  - name: Writer
+    num_replicas: 1
+    ray_actor_options:
+      num_cpus: 0.0
